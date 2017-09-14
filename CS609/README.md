@@ -112,4 +112,4 @@ The problem states:
 Find the string spelled by a genome path.
 
 * Given: A sequence of k-mers Pattern1, ... , Patternn such that the last k - 1 symbols of Patterni are equal to the first k - 1 symbols of Patterni+1 for i from 1 to n-1.
-* Return: A string Text of length k+n-1 where the i-th k-mer in Text is equal to Patterni for all i.
+* Return: A string Text of length k+n-1 where the i-th k-mer in Text is equal to Pattern i for all i.
