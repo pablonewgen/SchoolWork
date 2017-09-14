@@ -1,7 +1,11 @@
-def evenNumFile (file):
-i = 1
-readFile = open(file)
-for line in readFile.readlines():
-    if i % 2 == 0 :
-        print line
-    i += 1
+import sys
+def readFile(fileName):
+    file = open(fileName, 'r')
+    printLines(file)
+        
+def printLines(filePassed):
+    i = 1
+    for line in filePassed.readlines():
+        if i % 2 == 0 :
+            sys.stdout.write(line)
+        i += 1
