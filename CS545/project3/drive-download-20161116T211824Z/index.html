@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!-- 
+	Paul Truong Nguyen
+	Project3
+	JADRAN034
+
+ -->
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Project 3 - Marathon Form JADRAN034</title>
+		<link rel="stylesheet" href="proj3css.css">
+		<script src="/jquery/jquery.js"></script>
+		<script src="proj3jsW.js"></script>
+	</head>
+
+	<body>
+		<div>
+		<img class="banner" src="images/sdsu.jpg" alt="SDSU logo" />
+			<h3>Presents:</h3>
+			<h1>Active for Life Marathon</h1>
+			<p>
+				Run for a great cause! The ficticious marathon will occur on Sunday December 4, 2016 and will start at SDSU's Love Library.
+			</p>
+			<p>
+				All proceeds from the Active for Life 5K & 1K will go to the AL Foundation to support continued education and community outreach for healthier and happier lifestyles. 
+			</p>
+			<fieldset>
+			<legend>Runner Sign-Up Information</legend>
+			<form name="personal_info"
+				  action="process_request.php"
+				  method="post"
+				  enctype="multipart/form-data">
+			<ul>
+				<li><h2>First Name*</h2></li>
+				<li> <input type="text" name="fname"  placeholder = "First Name" id="fname" size="52" /></li>
+				<li><h2>Middle Name</h2></li>
+				<li> <input type="text" name="mname"  placeholder = "Middle Name" id="mname" size="52" /></li> 
+				<li><h2>Last Name*</h2>	</li>			
+				<li> <input type="text" name="lname" placeholder = "Last Name" id="lname" size="52" /></li> 
+				<li><h2>Address Line 1*</h2></li>
+				<li> <input type="text" name="address1" placeholder = "Address (Line 1)" id="address1" size="52" /></li>
+				<li><h2>Address Line 2</h2></li>    
+				<li> <input type="text" name="address2" placeholder = "Address (Line 2)" id="address2" size="52" /></li>
+				<li><h2>City*</h2></li>  				
+				<li> <input type="text" name="city"  placeholder = "City " id="city" size="52" /> 
+				<li><h2>State*</h2></li>
+				<li> <select name="state" id="state">
+					<option value="0" selected="selected">State of Residence</option>
+					<option value="Alabama">Alabama</option>
+					<option value="Alaska">Alaska</option>
+					<option value="Arizona">Arizona</option>
+					<option value="Arkansas">Arkansas</option>
+					<option value="California">California</option>
+					<option value="Colorado">Colorado</option>
+					<option value="Connecticut">Connecticut</option>
+					<option value="Delaware">Delaware</option>
+					<option value="District Of Columbia">District Of Columbia</option>
+					<option value="Florida">Florida</option>
+					<option value="Georgia">Georgia</option>
+					<option value="Hawaii">Hawaii</option>
+					<option value="Idaho">Idaho</option>
+					<option value="Illinois">Illinois</option>
+					<option value="Indiana">Indiana</option>
+					<option value="Iowa">Iowa</option>
+					<option value="Kansas">Kansas</option>		
+					<option value="Kentucky">Kentucky</option>
+					<option value="Louisiana">Louisiana</option>
+					<option value="Maine">Maine</option>
+					<option value="Maryland">Maryland</option>
+					<option value="Massachusetts">Massachusetts</option>
+					<option value="Michigan">Michigan</option>
+					<option value="Minnesota">Minnesota</option>
+					<option value="Mississippi">Mississippi</option>
+					<option value="Missouri">Missouri</option>
+					<option value="Montana">Montana</option>
+					<option value="Nebraska">Nebraska</option>
+					<option value="Nevada">Nevada</option>
+					<option value="New Hampshire">New Hampshire</option>
+					<option value="New Jersey">New Jersey</option>
+					<option value="New Mexico">New Mexico</option>
+					<option value="New York">New York</option>
+					<option value="North Carolina">North Carolina</option>
+					<option value="North Dakota">North Dakota</option>
+					<option value="Ohio">Ohio</option>
+					<option value="Oklahoma">Oklahoma</option>
+					<option value="Oregon">Oregon</option>
+					<option value="Pennsylvania">Pennsylvania</option>
+					<option value="Rhode Island">Rhode Island</option>
+					<option value="South Carolina">South Carolina</option>
+					<option value="South Dakota">South Dakota</option>
+					<option value="Tennessee">Tennessee</option>
+					<option value="Texas">Texas</option>
+					<option value="Utah">Utah</option>
+					<option value="Vermont">Vermont</option>
+					<option value="Virginia">Virginia</option>
+					<option value="Washington">Washington</option>
+					<option value="West Virginia">West Virginia</option>
+					<option value="Wisconsin">Wisconsin</option>
+					<option value="Wyoming">Wyoming</option>                                 
+				</select> 
+				</li> 
+				<li><h2>Zip Code*</h2></li>                     
+				<li> <input type="text" name="zip" placeholder = "Zip Code" id="zip" size="52" maxlength="5" /> </li>
+				<li><h2>Phone Number*</h2></li>    
+				<li> <input type='tel' name="phone" placeholder="ex: 555-555-5555" id="phone" size="52" /> </li>
+				<li><h2>Email Address*</h2></li>
+				<li> <input type="text" name="email" placeholder = "ex: abc@abcd.com" id="email" size="52" /> </li>
+				<li><h2>Gender*</h2></li>
+				<li> <input type="radio" name="gender" value="male" > Male <input type="radio" name="gender" value="female"> Female 
+				<input type="radio" name="gender" value="other"> Other 
+				</li>
+				<li><h2>Date of Birth*</h2></li>
+				<li> <input type="text" name="dob" placeholder="ex: MM/DD/YYYY" id="dob" size="52" maxlength="10" /> </li>
+				<li><h2>Known Medical Conditions</h2></li>
+				<li> <input type="text" name="medical" placeholder = "Medical Conditions" id="medical" size="52" /></li>
+				<li><h2>Experience Level*</h2></li>
+				<li>
+				<input type="radio" name="experience" value="novice"> Novice <input type="radio" name="experience" value="experienced"> Experienced 
+				<input type="radio" name="experience" value="expert"> Expert 
+				</li>
+				<li><h2>Race Category*</h2></li>
+				<li>
+				<input type="radio" name="category" value="teen"> Teen <input type="radio" name="category" value="adult"> Adult 
+				<input type="radio" name="category" value="senior"> Senior 
+				</li>
+				<li></li>
+				<li>&nbsp;</li>
+				<li><h2>Upload Profile Picture</h2></li>
+				<li>
+				<input type="file" id="file" name="file">
+				</li>
+				<li>
+				<li></li>
+				<div id="status">&nbsp;</div>
+				</li>
+
+			</ul>
+			<div id="button_panel">  
+				<input type="submit" value="Submit Form"  class="button" name="submitButton"/>
+				<input type="reset" value="Clear Form" class="button" name = "clearButton"/>
+			</div>              
+			</form>
+			</fieldset>        
+		</div>    
+	</body>  
+</html>

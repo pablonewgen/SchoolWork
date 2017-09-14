@@ -1,0 +1,132 @@
+body {
+    background-image: url("images/bgimage.jpg");
+	background-repeat: no-repeat;
+	max-width: 1080px;
+    }
+    
+h1 {
+    text-align: center;
+	font-family: helvetica;
+	padding-bottom: 0px ;
+	font-size: 20px;
+    } 
+h2 { 
+	text-align: left;
+	font-size: 80%;
+	font-family: helvetica;
+	padding: 0 0 0 0 ;
+	color: white;
+	}
+	
+h3 {
+	line-height: 1.2em;
+	text-align: center;
+	font-family: helvetica;
+	font-size: 90%;
+	}
+h4 {
+	line-height: 1.2em;
+	text-align: center;
+	font-family: helvetica;
+	font-size: 90%;
+	color: red;
+}	
+	
+IMG.banner {
+	display: block;
+    margin-left: auto;
+    margin-right: auto
+	}
+	
+p {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	font-size: 70%;
+	font-family: helvetica;
+	width: 500px;
+	}	
+    
+fieldset {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0px;                                  
+    width: 365px;
+    border: 1px;  
+    background-color: #052436; 
+	opacity: 0.9;
+    border-radius: 10px;
+    } 
+    
+legend {
+	text-align: center;
+    background-color: #72838e;
+    padding: 2px 10px 2px 10px;
+    border: 1px gray;
+    font-family: helvetica;
+    border-radius: 5px;
+    }
+
+ul {
+    list-style-type: none;
+    }
+    
+li {  
+	line-height: 0.1em;
+    margin: 0px;
+    font-size: 75%;
+    font-family: helvetica;
+    color: white;
+    }    
+
+label {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    }
+    
+input {
+	padding-top: 0px;
+	font-size: 80%;
+    font-family: helvetica;
+	background-color: #72838e;
+	color: white;
+    }
+	
+select {
+	width: 275px;
+	font-family: helvetica;
+	background-color: #72838e;
+	color: white;
+	}
+    
+.button {
+    background-color: #0085ca;
+    padding: 5px 15px 5px 15px;
+    font-family: helvetica;
+    font-size: 90%;
+    border: 1px black;
+    } 
+    
+.errorClass { 
+	border:  2px solid red;
+	}
+
+.errorRadio {
+	outline: 2px solid red;
+	}        
+
+#status {
+	padding-top: 5px;
+	height: 5px;
+    color: red;
+    font-style: italic bold;
+	font-size: 80%;
+	font-family: helvetica;
+	} 
+#button_panel {
+    text-align: center;
+    border-top: 1px dotted black;
+    padding-top: 5px;
+    }               

@@ -1,0 +1,25 @@
+use jadrn034;
+
+drop table if exists person;
+
+create table person(
+    id int AUTO_INCREMENT PRIMARY KEY,
+    fname varchar(50) NOT NULL,
+	mname varchar(50),
+	lname varchar(50) NOT NULL,
+    address1 varchar(100) NOT NULL,
+	address2 varchar(100),
+    city varchar(30) NOT NULL,
+    state char(25) NOT NULL,
+    zip char(5) NOT NULL,
+	phone varchar(50) NOT NULL, 
+    email varchar(50) NOT NULL,
+	gender char(8) NOT NULL,
+	dob varchar(30) NOT NULL,
+	medical varchar(100),
+	experience varchar(30) NOT NULL,
+	category varchar(30) NOT NULL,
+	filename varchar(100) NOT NULL);
+	
+INSERT INTO person VALUES(0,'Sally','','Reese','2910 Market St','','San Diego','CA','92101','8585808889','sallyR@cox.net', 'female', '08/11/1991','allergies', 'experienced', 'adult','flappy.png');
+/* Inserted person is to test duplicate */
