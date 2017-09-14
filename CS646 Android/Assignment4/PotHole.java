@@ -1,7 +1,4 @@
-package com.example.paultruongnguyen.assignment4;
-
-import java.util.Date;
-import java.util.UUID;
+package com.example.paultruongnguyen.assignment5;
 
 /**
  * Created by Paul on 2/12/2016.

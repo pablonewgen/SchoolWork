@@ -1,4 +1,4 @@
-package com.example.paultruongnguyen.assignment4;
+package com.example.paultruongnguyen.assignment5;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -19,7 +19,13 @@ import com.android.volley.toolbox.ImageRequest;
 
 public class PotHoleFragment extends Fragment {
 
-    private PotHole mPotHole;
+    private static final String ARG_REPORT_ID = "id";
+    private static final String ARG_DATE = "date";
+    private static final String ARG_DESCRIPTION = "description";
+    private static final String ARG_LATITUDE = "latitude";
+    private static final String ARG__LONGITUDE = "longitude";
+    private static final String ARG__IMAGETYPE = "imagetype";
+
     private TextView mID;
     private TextView mDescription;
     private Button mDateButton;
@@ -35,27 +41,47 @@ public class PotHoleFragment extends Fragment {
     private String imagetype;
     private ImageView mPhotoView;
 
+    public static PotHoleFragment newInstance(PotHole potHole) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_REPORT_ID, potHole.getId());
+        args.putSerializable(ARG_DATE, potHole.getDate());
+        args.putSerializable(ARG_DESCRIPTION, potHole.getDescription());
+        args.putSerializable(ARG_LATITUDE, potHole.getLatitude());
+        args.putSerializable(ARG__LONGITUDE, potHole.getLongitude());
+        args.putSerializable(ARG__IMAGETYPE, potHole.getImageType());
+
+        PotHoleFragment fragment = new PotHoleFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPotHole = new PotHole();
+        if (getActivity().findViewById(R.id.detail_fragment_container) == null) {
+            Bundle potHoleData = getActivity().getIntent().getExtras();
 
-        Bundle potHoleData = getActivity().getIntent().getExtras();
+            report = potHoleData.getString("id");
+            date = potHoleData.getString("date");
+            description = potHoleData.getString("description");
+            latitude = potHoleData.getString("latitude");
+            longitude = potHoleData.getString("longitude");
+            imagetype = potHoleData.getString("imagetype");
+        } else {
 
-        report = potHoleData.getString("id");
-        date = potHoleData.getString("date");
-        description = potHoleData.getString("description");
-        latitude = potHoleData.getString("latitude");
-        longitude = potHoleData.getString("longitude");
-        imagetype = potHoleData.getString("imagetype");
-
+            report = getArguments().getString("id");
+            date = getArguments().getString("date");
+            description = getArguments().getString("description");
+            latitude = getArguments().getString("latitude");
+            longitude = getArguments().getString("longitude");
+            imagetype = getArguments().getString("imagetype");
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_pothole, container, false);
-
 
         mID = (TextView) v.findViewById(R.id.pothole_report_id);
         mID.setText(report);
@@ -83,7 +109,6 @@ public class PotHoleFragment extends Fragment {
         mImagetype.setText(imagetype);
 
         mPhotoView = (ImageView)v.findViewById(R.id.pothole_imageView_detail);
-
         JChanImageRequest();
 
         return v;
