@@ -1,51 +1,21 @@
-def read_fasta(fileName):
-    fasta = {}
-    title = ''
+class Node:
+  """This creates a node, that is the main object used for the debrujin graph"""
+  def __init__(self,kmer):
+     self.kmer = kmer
+     self.edges = set()
+  def __str__(self):
+     return "kmer = {}\n edges = {}".format(self.kmer,self.edges)
+
+def openFile(fileName):
+    """This function opens a text file and formats the contents into a usable list"""
+    dnaString = []
     with open(fileName) as f:
-        for line in f:
-            if line.startswith(">"):
-                title = line.lstrip(">").rstrip("\n")
-            else:
-                fasta.setdefault(title, []).append(line.rstrip("\n"))
-    for key in fasta:
-        fasta[key] = ''.join(fasta[key])
-    values = fasta.values()
-    return values
-
-def dnaToRNA (str):
-    replaceChar = list(str)
-    for i, c in enumerate(replaceChar):
-        if c == 'T':
-            replaceChar[i] = 'U'
-    newString = "".join(replaceChar)
-    return newString
-
-def rnaToProtein(str):
-    proteinSize = 3
-    groupedRNA = []
-    proteinString= ''
-    for i in range (0, len(str), proteinSize):
-       groupedRNA.append(str[i : i + proteinSize])
-    rnaCodon = {'UUU': 'F', 'CUU': 'L', 'AUU': 'I', 'GUU': 'V', 'UUC': 'F',
-                'CUC': 'L', 'AUC': 'I', 'GUC': 'V', 'UUA': 'L', 'CUA': 'L',
-                'AUA': 'I', 'GUA': 'V', 'UUG': 'L', 'CUG': 'L', 'AUG': 'M',
-                'GUG': 'V', 'UCU': 'S', 'CCU': 'P', 'ACU': 'T', 'GCU': 'A',
-                'UCC': 'S', 'CCC': 'P', 'ACC': 'T', 'GCC': 'A', 'UCA': 'S',
-                'CCA': 'P', 'ACA': 'T', 'GCA': 'A', 'UCG': 'S', 'CCG': 'P',
-                'ACG': 'T', 'GCG': 'A', 'UAU': 'Y', 'CAU': 'H', 'AAU': 'N',
-                'GAU': 'D', 'UAC': 'Y', 'CAC': 'H', 'AAC': 'N', 'GAC': 'D',
-                'UAA': 'Stop', 'CAA': 'Q', 'AAA': 'K', 'GAA': 'E',
-                'UAG': 'Stop', 'CAG': 'Q', 'AAG': 'K', 'GAG': 'E',
-                'UGU': 'C', 'CGU': 'R', 'AGU': 'S', 'GGU': 'G', 'UGC': 'C',
-                'CGC': 'R', 'AGC': 'S', 'GGC': 'G', 'UGA': 'Stop',
-                'CGA': 'R', 'AGA': 'R', 'GGA': 'G', 'UGG': 'W', 'CGG': 'R',
-                'AGG': 'R', 'GGG': 'G' }
-    for key in groupedRNA:
-        if key in rnaCodon:
-                    proteinString+=rnaCodon.get(key)
-    return proteinString
+        for line in f.readlines():
+            dnaString.append(line.replace('\n',''))
+    return dnaString
 
 def dnaReverseComplement(str):
+    """This function produces the reverse complement of a DNA string"""
     convertedPassedString = str[::-1]
     returnedComplement = ""
     convertedStr = list(convertedPassedString)
@@ -55,35 +25,44 @@ def dnaReverseComplement(str):
         returnedComplement += complementDict[base]
     return returnedComplement
 
-def readingFrames(fileName):
-    dnaList = read_fasta(fileName)
-    dna = dnaList[0]
-    reverseComp = dnaReverseComplement(dna)
-    return[dnaToRNA(reverseComp[2:]), dnaToRNA(reverseComp[1:]), dnaToRNA(reverseComp),  dnaToRNA(dna[2:]), dnaToRNA(dna[1:]), dnaToRNA(dna)]
+def kmersComp(str, int):
+    """This function produces the kmers setlist"""
+    printedKmers = ''
+    compiledList = []
+    compLength = int - 1
+    compString = str
+    reversedComp = dnaReverseComplement(str)
+    
+    for i in range(0, len(compString)):
+        if ((i + compLength) <= (len(compString)) + 1):
+            printedKmers = compString[i:compLength + i]
+            if len(printedKmers) == compLength:
+                compiledList.append(printedKmers)
+    for kmers in sorted(compiledList):
+        compiledList += kmers
+    return compiledList
 
-def findBetween(s, first, last):
-    try:
-        start = s.index(first) + len(first) - 1
-        end = s.index(last, start)
-        return s[start:end]
-    except ValueError:
-        return None
+if __name__ == "__main__":
+    dna_list = openFile("rosalind_dbru.txt")
+    pairs = []
+    dna_list+=[dnaReverseComplement(x) for x in dna_list]
+    kmerLength = len(dna_list[0])
 
-def orf(fileName):
-    frames = readingFrames(fileName)
-    sliced = ""
-    for frame in frames:
-        protein = findBetween(rnaToProtein(frame), 'M', 'Stop')
-        if rnaToProtein(frame) != None: print rnaToProtein(frame)
-        if (protein != None):
-            sliced = protein[1:] + 'Stop'
-            print protein
-        inProtein = findBetween(sliced, 'M', 'Stop')
-        if (inProtein != None):
-            if (len(inProtein) != 1):
-                 print inProtein
-        
-    # cannot splice protein on second try because there is no way to find a 'Stop' as it has already found it in the first subtring splice.
-    # Go through the length of the protein instead
-        
-
+    node_dict = {}
+    for dna in dna_list:
+        kmerList = kmersComp(dna, kmerLength)
+        last_node = None
+        for kmer in kmerList:
+            if (len(kmer) != 1):
+                if kmer not in node_dict:
+                   node_dict[kmer] = Node(kmer)
+                if last_node:
+                    last_node.edges.add(node_dict[kmer])
+                last_node = node_dict[kmer]
+            
+    for kmer, node in sorted(node_dict.items()):
+        for edge in node.edges:
+            pairs.append( "({0}, {1})".format(kmer,edge.kmer))
+    pairs.sort()        
+    for pair in pairs:
+        print pair
